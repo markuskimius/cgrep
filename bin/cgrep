@@ -11,10 +11,12 @@ def main():
     parser.add_argument("-k", "--block-marker", dest="block_marker", metavar="PATTERN", default="^$", help="regex pattern describing the start of a block (default=^$)")
     parser.add_argument("-i", "--ignore-case", dest="ignore_case", default=False, action="store_true", help="ignore case distinctions")
     parser.add_argument("-v", "--invert-match", dest="invert_match", default=False, action="store_true", help="select non-matching blocks")
+    parser.add_argument("--color", dest="color", metavar="WHEN", default="never", help="use markers to highlight the matching strings; WHEN is 'always', 'never', or 'auto'")
     opts = parser.parse_args()
 
-    opts.pattern = re.compile(opts.pattern)
-    opts.block_marker = re.compile(opts.block_marker)
+    opts.flags = re.IGNORECASE if(opts.ignore_case) else 0
+    opts.pattern = re.compile(opts.pattern, opts.flags)
+    opts.block_marker = re.compile(opts.block_marker, opts.flags)
 
     for f in opts.files:
         grep(opts.block_marker, opts.pattern, f)
@@ -43,7 +45,7 @@ def grep_fd(marker, pattern, fd):
 
         # Check block
         if(re.search(marker, line)):
-            if(is_match):
+            if(is_match ^ opts.invert_match):
                 for b in buffer: print(b)
             is_match = False
             buffer = []
@@ -55,7 +57,7 @@ def grep_fd(marker, pattern, fd):
         buffer.append(line)
         line = fd.readline()
 
-    if(is_match):
+    if(is_match ^ opts.invert_match):
         for b in buffer: print(b)
 
 if __name__ == "__main__":

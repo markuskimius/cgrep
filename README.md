@@ -6,12 +6,13 @@ This tool displays a block of text that matches a regex.
 ## Usage
 
 ```
-usage: cgrep [-h] [-k PATTERN] [-i] [-v] PATTERN [FILE [FILE ...]]
+usage: cgrep [-h] [-k PATTERN] [-i] [-v] [--color WHEN]
+             PATTERN [FILE [FILE ...]]
 
 grep blocks of text.
 
 positional arguments:
-  PATTERN               pattern to grep for.
+  PATTERN               pattern to grep for
   FILE                  file(s) to grep.
 
 optional arguments:
@@ -19,6 +20,8 @@ optional arguments:
   -k PATTERN, --block-marker PATTERN
                         regex pattern describing the start of a block
                         (default=^$)
+  -i, --ignore-case     ignore case distinctions
+  -v, --invert-match    select non-matching blocks
 ```
 
 ## Example
@@ -46,8 +49,7 @@ By default, a *block* begins and ends with an empty line.
 This default can be changed with the `-k` option.
 
 ## To Do
-- Implement the `-i` (case insensitive) option.
-- Implement the `-v` (inverse match) option.
+- Read from stdin if no file name supplied.
 
 ## Footnotes
 
