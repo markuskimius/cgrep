@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+
+import sys, re, argparse
+
+def main():
+    global opts
+
+    parser = argparse.ArgumentParser(description="grep blocks of text.")
+    parser.add_argument("pattern", metavar="PATTERN", help="pattern to grep for")
+    parser.add_argument("files", metavar="FILE", nargs="*", help="file(s) to grep.")
+    parser.add_argument("-k", "--block-marker", dest="block_marker", metavar="PATTERN", default="^$", help="regex pattern describing the start of a block (default=^$)")
+    parser.add_argument("-i", "--ignore-case", dest="ignore_case", default=False, action="store_true", help="ignore case distinctions")
+    parser.add_argument("-v", "--invert-match", dest="invert_match", default=False, action="store_true", help="select non-matching blocks")
+    opts = parser.parse_args()
+
+    opts.pattern = re.compile(opts.pattern)
+    opts.block_marker = re.compile(opts.block_marker)
+
+    for f in opts.files:
+        grep(opts.block_marker, opts.pattern, f)
+
+def grep(marker, pattern, file):
+    global opts
+
+    try:
+        fd = open(file, "rt")
+    except IOError as e:
+        print(e)
+        sys.exit(1)
+
+    grep_fd(marker, pattern, fd)
+
+    fd.close()
+
+def grep_fd(marker, pattern, fd):
+    global opts
+    buffer = []
+    is_match = False
+
+    line = fd.readline()
+    while(line != ""):
+        line = line.splitlines()[0]
+
+        # Check block
+        if(re.search(marker, line)):
+            if(is_match):
+                for b in buffer: print(b)
+            is_match = False
+            buffer = []
+
+        # Check match
+        if(re.search(pattern, line)): is_match = True
+
+        # Next!
+        buffer.append(line)
+        line = fd.readline()
+
+    if(is_match):
+        for b in buffer: print(b)
+
+if __name__ == "__main__":
+    main()
