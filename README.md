@@ -48,9 +48,6 @@ cgrep released on github.
 By default, a *block* begins and ends with an empty line.
 This default can be changed with the `-k` option.
 
-## To Do
-- Read from stdin if no file name supplied.
-
 ## Footnotes
 
 cgrep was inspired by mgrep.  mgrep was (is?) a UNIX command line tool to grep

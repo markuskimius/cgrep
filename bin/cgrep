@@ -18,6 +18,11 @@ def main():
     opts.pattern = re.compile(opts.pattern, opts.flags)
     opts.block_marker = re.compile(opts.block_marker, opts.flags)
 
+    # Read from STDIN if no file specified
+    if(len(opts.files) == 0):
+        opts.files.append("-")
+
+    # Grep each file
     for f in opts.files:
         grep(opts.block_marker, opts.pattern, f)
 
@@ -25,14 +30,15 @@ def grep(marker, pattern, file):
     global opts
 
     try:
-        fd = open(file, "rt")
+        fd = sys.stdin if(file == "-") else open(file, "rt")
     except IOError as e:
         print(e)
         sys.exit(1)
 
     grep_fd(marker, pattern, fd)
 
-    fd.close()
+    if(file != "-"):
+        fd.close()
 
 def grep_fd(marker, pattern, fd):
     global opts
