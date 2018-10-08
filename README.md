@@ -6,8 +6,7 @@ This tool displays a block of text that matches a regex.
 ## Usage
 
 ```
-usage: cgrep [-h] [-k PATTERN] [-i] [-v] [--color WHEN]
-             PATTERN [FILE [FILE ...]]
+usage: cgrep [-h] [-k PATTERN] [-i] [-v] [--color] PATTERN [FILE [FILE ...]]
 
 grep blocks of text.
 
@@ -22,6 +21,7 @@ optional arguments:
                         (default=^$)
   -i, --ignore-case     ignore case distinctions
   -v, --invert-match    select non-matching blocks
+  --color               use markers to highlight the matching strings
 ```
 
 ## Example
