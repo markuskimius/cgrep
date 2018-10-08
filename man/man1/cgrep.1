@@ -11,24 +11,24 @@ changed using the \fB\-k\fP option.  A \fIFILE\fP of \*(lq\-\*(rq stands for
 standard input.  If no \fIFILE\fP is given, the standard input is read.
 .SS Options
 .TP
-\fB-h\fP, \fB--help\fP
+\fB\-h\fP, \fB\-\-help\fP
 Output a usage message and exit.
 .TP
-\fB-k\fP \fIKPATTERN\fP, \fB--block-marker\fP=\fIKPATTERN\fP
+\fB\-k\fP \fIKPATTERN\fP, \fB\-\-block\-marker\fP=\fIKPATTERN\fP
 Change the definition of a block such that blocks are separated by the line
 matching \fIKPATTERN\fP instead of an empty line.  The line matching
 \fIKPATTERN\fP is considered to be a part of the following block.
 .TP
-\fB-i\fP, \fB--ignore-case\fP
+\fB\-i\fP, \fB\-\-ignore\-case\fP
 Ignore case distinctions, so that characters that differ only in case match
 each other.
 .TP
-\fB-v\fP, \fB--invert-match\fP
-Invert the sense of matching, to select non-matching blocks.
+\fB\-v\fP, \fB\-\-invert\-match\fP
+Invert the sense of matching, to select non\-matching blocks.
 .TP
-\fB--color\fP
-Surround the matched (non-empty) strings with escape sequences to display them
+\fB\-\-color\fP
+Surround the matched (non\-empty) strings with escape sequences to display them
 in color on the terminal. This function is automatically disabled if output
-to a non-terminal.
+to a non\-terminal.
 .SH "SEE ALSO"
 grep(1)
