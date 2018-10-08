@@ -1,0 +1,34 @@
+.TH CGREP 1 "8 October 2018"
+.SH NAME
+cgrep \- print blocks matching pattern
+.SH SYNOPSIS
+\fBcgrep\fP [\-h] [\-k \fIPATTERN\fP] [\-i] [\-v] [\-\-color] \fIPATTERN\fP [\fIFILE\fP [\fIFILE\fP ...]]
+.SH DESCRIPTION
+\fBcgrep\fP search for \fIPATTERN\fP in each \fIFILE\fP and displays the
+matching blocks of text.  By default, a \*(lqblock\*(rq is defined as a set of
+lines separated by a line with no text (an empty line).  This defintion can be
+changed using the \fB\-k\fP option.  A \fIFILE\fP of \*(lq\-\*(rq stands for
+standard input.  If no \fIFILE\fP is given, the standard input is read.
+.SS Options
+.TP
+\fB-h\fP, \fB--help\fP
+Output a usage message and exit.
+.TP
+\fB-k\fP \fIKPATTERN\fP, \fB--block-marker\fP=\fIKPATTERN\fP
+Change the definition of a block such that blocks are separated by the line
+matching \fIKPATTERN\fP instead of an empty line.  The line matching
+\fIKPATTERN\fP is considered to be a part of the following block.
+.TP
+\fB-i\fP, \fB--ignore-case\fP
+Ignore case distinctions, so that characters that differ only in case match
+each other.
+.TP
+\fB-v\fP, \fB--invert-match\fP
+Invert the sense of matching, to select non-matching blocks.
+.TP
+\fB--color\fP
+Surround the matched (non-empty) strings with escape sequences to display them
+in color on the terminal. This function is automatically disabled if output
+to a non-terminal.
+.SH "SEE ALSO"
+grep(1)
