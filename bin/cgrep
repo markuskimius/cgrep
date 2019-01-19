@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, re, argparse
+import sys, errno, re, argparse
 
 def main():
     global opts
@@ -83,4 +83,4 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         print("")
-        sys.exit(130)
+        sys.exit(errno.EOWNERDEAD)
