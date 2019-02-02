@@ -51,7 +51,7 @@ This default can be changed with the `-k` option.
 ## Footnotes
 
 cgrep was inspired by mgrep.  mgrep was (is?) a UNIX command line tool to grep
-emails on UNIX accounts, stored as flat files in a format called "mbox".
+emails on UNIX accounts, stored as flat files in a format called "[mbox]".
 mgrep-ing a pattern in an mbox displayed the entire email containing the
 pattern.  cgrep is a generalized version of the mgrep that can grep for any
 block of text and not just emails in an mbox.  Passing `-k '^From '` option to
@@ -59,3 +59,4 @@ cgrep is practically equivalent to mgrep.
 
 The "c" in cgrep is largely historical.  It originally stood for "context".
 
+[mbox]: https://en.wikipedia.org/wiki/Mbox
