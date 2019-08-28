@@ -5,7 +5,7 @@
 https://github.com/markuskimius/cgrep
 """
 
-import sys, errno, re, argparse
+import os, sys, errno, re, argparse
 
 __copyright__ = "Copyright 2018-2019, Mark Kim"
 __license__ = "Apache 2.0"
@@ -41,7 +41,14 @@ def grep(marker, pattern, file):
     global opts
 
     try:
-        fd = sys.stdin if(file == "-") else open(file, "rt")
+        fd = sys.stdin if(file == "-") else open(file, "rt", newline=os.linesep)
+
+        # `newline=os.linesep` is to disable the `unviersal newline` feature.
+        # This feature, enabled by default when opening a file, is apparently
+        # not enabled by default on stdin, so disabling it creates a consistent
+        # experience when reading from a file vs. when reading from stdin.
+        # We don't want universal newline because it can misinterpret a carriage
+        # return mid-line of a file as a line terminator in UNIX.
     except IOError as e:
         print(e)
         sys.exit(1)
@@ -58,7 +65,9 @@ def grep_fd(marker, pattern, fd):
 
     line = fd.readline()
     while(line != ""):
-        line = line.splitlines()[0]
+        # Strip the trailing newline
+        if line[-1] == '\n':
+            line = line[0:-1]
 
         # Check block
         if(re.search(marker, line)):
