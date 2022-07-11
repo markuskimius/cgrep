@@ -3,27 +3,6 @@ A command line utility to grep for blocks of text
 
 This tool displays a block of text that matches a regex.
 
-## Usage
-
-```
-usage: cgrep [-h] [-k PATTERN] [-i] [-v] [--color] PATTERN [FILE [FILE ...]]
-
-grep blocks of text.
-
-positional arguments:
-  PATTERN               pattern to grep for
-  FILE                  file(s) to grep.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -k PATTERN, --block-marker PATTERN
-                        regex pattern describing the start of a block
-                        (default=^$)
-  -i, --ignore-case     ignore case distinctions
-  -v, --invert-match    select non-matching blocks
-  --color               use markers to highlight the matching strings
-```
-
 ## Example
 
 Given the following file,
@@ -47,6 +26,33 @@ cgrep released on github.
 
 By default, a *block* begins and ends with an empty line.
 This default can be changed with the `-k` option.
+
+## Installation
+
+```
+pip install cgrep
+```
+
+## Usage
+
+```
+usage: cgrep [-h] [-k PATTERN] [-i] [-v] [--color] PATTERN [FILE [FILE ...]]
+
+grep blocks of text.
+
+positional arguments:
+  PATTERN               pattern to grep for
+  FILE                  file(s) to grep.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -k PATTERN, --block-marker PATTERN
+                        regex pattern describing the start of a block
+                        (default=^$)
+  -i, --ignore-case     ignore case distinctions
+  -v, --invert-match    select non-matching blocks
+  --color               use markers to highlight the matching strings
+```
 
 ## Footnotes
 
